@@ -3,7 +3,7 @@
 # thanks: https://github.com/elouizbadr/docker-mysql-shell/blob/master/Dockerfile
 #
 
-FROM ubuntu:16.10
+FROM ubuntu:17.04
 
 LABEL maintainer="chen56@msn.com"
 
@@ -15,9 +15,9 @@ RUN set -x \
        ca-certificates apt-transport-https wget libprotobuf10 libpython2.7 python \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell_1.0.9-1ubuntu16.10_amd64.deb \
- && DEBIAN_FRONTEND=noninteractive dpkg -i ./mysql-shell_1.0.9-1ubuntu16.10_amd64.deb \
- && rm -f ./mysql-shell_1.0.9-1ubuntu16.10_amd64.deb
+RUN wget https://dev.mysql.com/get/Downloads/MySQL-Shell/mysql-shell_1.0.10-1ubuntu17.04_amd64.deb \
+ && DEBIAN_FRONTEND=noninteractive dpkg -i ./mysql-shell_1.0.10-1ubuntu17.04_amd64.deb \
+ && rm -f ./mysql-shell_1.0.10-1ubuntu17.04_amd64.deb
 
 ENTRYPOINT ["mysqlsh"]
 

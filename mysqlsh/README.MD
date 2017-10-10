@@ -5,6 +5,6 @@
 ## use
 
 ```bash
-docker run --rm -it chen56/mysqlsh --uri root:111111@192.168.1.101:3306/abc
+docker run --rm -it chen56/mysqlsh "root:111111@192.168.1.101:3306/abc"
 ```
 
