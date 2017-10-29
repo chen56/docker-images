@@ -7,6 +7,6 @@
 ```bash
 docker run --rm \
    -v `pwd`:/app:rw \
-   chen56/mo 
+   chen56/sshuttle 
 ```
 
