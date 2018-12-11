@@ -1,18 +1,17 @@
 # Dockerfile for gRPC Go
-FROM grpc/go:1.0
+FROM golang:1.11
 
-# Install protoc-gen-go
-# RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && \
-#     go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger && \
-#     go get -u github.com/golang/protobuf/protoc-gen-go
-
-# Install grpc-gateway
-RUN mkdir -p /tmp/grpc-gateway && \
-    curl -L https://github.com/grpc-ecosystem/grpc-gateway/archive/v1.6.2.zip > /tmp/grpc-gateway/grpc-gateway.zip && \
-    cd /tmp/grpc-gateway && \
-    unzip grpc-gateway.zip && \
-    mkdir -p /go/src/github.com/golang/grpc-gateway/protoc-gen-grpc-gateway/ && \
-    cp -r /tmp/grpc-gateway/grpc-gateway-1.6.2/protoc-gen-grpc-gateway/* /go/src/github.com/golang/grpc-gateway/protoc-gen-grpc-gateway/ && \
-    mkdir -p /go/src/github.com/golang/grpc-gateway/protoc-gen-swagger/ && \
-    cp -r /tmp/grpc-gateway/grpc-gateway-1.6.2/protoc-gen-swagger/* /go/src/github.com/golang/grpc-gateway/protoc-gen-swagger/
-
+RUN set -x && \
+    apt-get update && \
+    apt-get -y install unzip && \
+    apt-get clean && \
+    ## protoc
+    curl -L https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip > /tmp/protoc.zip && \
+    unzip -d /tmp/protoc/ /tmp/protoc.zip && \
+    cp /tmp/protoc/bin/protoc /usr/local/bin && \
+    cp -R /tmp/protoc/include/* /usr/local/include && \
+    rm -r /tmp/* && \
+    ## grpc-gateway
+    go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && \
+    go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger && \
+    go get -u github.com/golang/protobuf/protoc-gen-go
