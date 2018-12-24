@@ -18,4 +18,7 @@ RUN curl -L https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1
 ## grpc-gateway
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && \
     go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger && \
-    go get -u github.com/golang/protobuf/protoc-gen-go
+    go get -u github.com/golang/protobuf/protoc-gen-go && \
+    cd /go/src/github.com/golang/protobuf/proto && \
+    git checkout tags/v1.2.0 -b v1.2.0 && \
+    go install
