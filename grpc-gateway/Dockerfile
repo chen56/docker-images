@@ -1,5 +1,5 @@
 # Dockerfile for gRPC Go
-FROM golang:1.11
+FROM golang:1.12rc1
 
 # docker run --rm -it chen56/grpc-gateway:latest sh
 
@@ -22,3 +22,19 @@ RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && 
     cd /go/src/github.com/golang/protobuf/proto && \
     git checkout tags/v1.2.0 -b v1.2.0 && \
     go install
+
+# Install swagger-codegen
+ENV SWAGGER_CODEGEN_VERSION=2.4.1
+RUN apt-get install -y openjdk-8-jre wget && \
+    wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/${SWAGGER_CODEGEN_VERSION}/swagger-codegen-cli-${SWAGGER_CODEGEN_VERSION}.jar \
+    -O /usr/local/bin/swagger-codegen-cli.jar && \
+    apt-get remove -y wget
+ENV SWAGGER_CODEGEN="java -jar /usr/local/bin/swagger-codegen-cli.jar"
+
+# Install swagger-codegen
+ENV SWAGGER3_CODEGEN_VERSION=3.0.4
+RUN apt-get install -y openjdk-8-jre wget && \
+    wget http://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/${SWAGGER3_CODEGEN_VERSION}/swagger-codegen-cli-${SWAGGER3_CODEGEN_VERSION}.jar \
+    -O /usr/local/bin/swagger3-codegen-cli.jar && \
+    apt-get remove -y wget
+ENV SWAGGER3_CODEGEN="java -jar /usr/local/bin/swagger3-codegen-cli.jar"
