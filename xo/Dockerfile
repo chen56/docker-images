@@ -1,14 +1,11 @@
 #
 # mo
 #
-FROM golang
+FROM golang:1.13
 
 LABEL maintainer="ChenPeng<chen56@msn.com>"
 
 USER root
 
-RUN set -eux; \
-  go get -v -u golang.org/x/tools/cmd/goimports; \
-  go get -v -u github.com/knq/xo;
-
-ENTRYPOINT ["xo"]
+RUN go get -v -u golang.org/x/tools/cmd/goimports
+RUN go get -v -u github.com/xo/xo
