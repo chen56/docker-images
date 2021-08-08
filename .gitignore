@@ -14,3 +14,9 @@
 .glide/
 
 .DS_Store
+
+# some compile out dir
+bin
+build
+target
+out
